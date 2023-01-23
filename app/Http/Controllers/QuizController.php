@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Quiz;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -15,7 +16,7 @@ class QuizController extends Controller
      */
     public function index()
     {
-        $quizzes = Quiz::all();
+        $quizzes = Quiz::with('Category:id,title')->get();
         return Inertia::render('Quizzes/Index', ['quizzes' => $quizzes]);
     }
 
@@ -26,7 +27,8 @@ class QuizController extends Controller
      */
     public function create()
     {
-        return Inertia::render('Quizzes/Create');
+        $categories = Category::all();
+        return Inertia::render('Quizzes/Create', ['categories' => $categories]);
     }
 
     /**
@@ -39,7 +41,15 @@ class QuizController extends Controller
     {
         // add validation here
 
+        $requesty = $request->all();
+        dd($requesty);
+        dd($requesty['questions']);
         Quiz::create($request->all());
+        // ->questions($request);
+        
+
+
+
         return redirect()->route('quizzes.index');
     }
 
