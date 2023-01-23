@@ -7,7 +7,7 @@
 </template>
 
 <script setup>
-import BreezeAuthenticatedLayout from '@/Layouts/Authenticated.vue';
+import BreezeAuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 
 </script>
 
