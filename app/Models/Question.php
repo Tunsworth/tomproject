@@ -13,7 +13,7 @@ class Question extends Model
         'question' , 'quiz_id', 'answer_id'
     ];
 
-    public function questions(){
+    public function quizzes(){
         return $this->belongsTo(Quiz::class);
     }
 

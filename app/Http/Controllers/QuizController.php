@@ -17,6 +17,8 @@ class QuizController extends Controller
     public function index()
     {
         $quizzes = Quiz::with('Category:id,title')->get();
+        // $categories = Category::all();
+        // dd($categories);
         return Inertia::render('Quizzes/Index', ['quizzes' => $quizzes]);
     }
 
@@ -40,16 +42,24 @@ class QuizController extends Controller
     public function store(Request $request)
     {
         // add validation here
+        $data = $request->all();
 
-        $requesty = $request->all();
-        dd($requesty);
-        dd($requesty['questions']);
-        Quiz::create($request->all());
-        // ->questions($request);
+        $quiz = Quiz::firstOrCreate([
+            'title' => $data['title'],
+            'description' => $data['description'],
+            'category_id' => $data['category_id']],
+        );
         
+        collect($data['questions'])->map(function ($question) use ($quiz) {
+            $question_record = $quiz->questions()->create($question);
+            // dd($question['answers']);
+            $question_record->answers()->createMany($question['answers']);
+        });
 
+        // $questions = $quiz->questions()->createMany($data['questions']);
 
-
+        // $answers = $questions;
+    
         return redirect()->route('quizzes.index');
     }
 
@@ -74,8 +84,10 @@ class QuizController extends Controller
      */
     public function edit(Quiz $quiz)
     {
+        $categories = Category::all();
         return Inertia::render('Quizzes/Edit', [
-            'quiz' => $quiz 
+            'quiz' => $quiz->formatQuiz(),
+            'categories' => $categories
         ]);
     }
 

@@ -1,4 +1,5 @@
 <script setup>
+import ApplicationLogo from '@/Components/ApplicationLogo.vue';
 import Checkbox from '@/Components/Checkbox.vue';
 import GuestLayout from '@/Layouts/GuestLayout.vue';
 import InputError from '@/Components/InputError.vue';
@@ -28,6 +29,12 @@ const submit = () => {
 <template>
     <GuestLayout>
         <Head title="Log in" />
+
+        <div>
+            <Link href="/">
+                <ApplicationLogo class="w-100 h-100 mb-4 fill-current text-gray-500" />
+            </Link>
+        </div>
 
         <div v-if="status" class="mb-4 font-medium text-sm text-green-600">
             {{ status }}
