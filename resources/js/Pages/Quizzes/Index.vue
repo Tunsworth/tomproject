@@ -37,6 +37,7 @@ function destroy(id) {
                 </div>
                 <div v-if="quizzes">
                     <div v-for="quiz in quizzes" class="card bg-white overflow-hidden shadow-sm sm:rounded-lg my-4">
+                        <Link :href="route('quizzes.show', quiz.id)" >
                         <div class="p-6 bg-white border-b border-gray-200">
                             <div class="flex content-start justify-between">
                                 <div>
@@ -66,6 +67,8 @@ function destroy(id) {
 
                             </div>
                         </div>
+                    </Link>
+
                     </div>
                 </div>
                
