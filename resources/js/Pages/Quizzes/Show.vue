@@ -3,7 +3,7 @@
     <AuthenticatedLayout>
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                Edit quiz
+                
             </h2>
         </template>
         <div class="py-12">
@@ -28,10 +28,11 @@
                             <div>
                                 <h1>Title: {{ quiz.title }}</h1>
                                 <h2>Description: {{ quiz.description }}</h2>
+                                <h2>Questions: {{ quiz.questions.length  }}</h2>
                             </div>
                             <div class="flexflex-row space-between">
                                 <h3>Category: {{ quiz.category.title}}</h3>
-                                <div>
+                                <div v-if="$page.props.auth.roles.includes('edit')">
                                     <Link
                                         tabIndex="1"
                                         className="px-4 py-2 text-sm text-white bg-blue-500 rounded"
@@ -57,11 +58,18 @@
                                       <Label for="question" :value="`Question ${index+1}`" />
                                       <h1>{{question.question}}</h1>
                                       <!-- add check to only show answers if view or edit  -->
-                                      
-                                      <Label for="question" :value="`Answers`" />
-                                        <div class="flex " v-for="(answer, number) in question.answers">
-                                          <div >{{ number + 1 }}. {{ answer.answer }}</div>
-                                        </div>
+                                      <div v-if="!$page.props.auth.roles.includes('restricted')" >
+
+                                            <Label for="question" :value="`Reveal Answers`" /> <button @click="showAnswer(index)" >reveal </button>
+                                            <div v-if="revealAnswer[index] == true"> 
+                                                <div class="flex " v-for="(answer, number) in question.answers">
+                                                <div >{{ number + 1 }}. {{ answer.answer }}</div>
+                                            </div>
+                                            </div>
+                                        
+
+                                      </div>
+                                     
                                   </div>
                               </div>
                           </div>
@@ -87,6 +95,7 @@ const props = defineProps({
 });
 
 const pageTab = ref('information');
+const revealAnswer = ref([])
 
 const  changeTab = () => {
     if(pageTab.value == 'information'){
@@ -96,10 +105,32 @@ const  changeTab = () => {
     }   
 };
 
+const showAnswer = (index) => {
+    if(revealAnswer[index].value == true){
+        revealAnswer.push([{
+          
+        }
+        ])
+    }else {
+        revealAnswer[index].true = false
+    }   
+};
+
 
 </script>
 
 <style lang="scss" scoped>
+
+    h1{
+        font-size: 1.2rem;
+        font-weight: 900;
+        color: #0E67B4;
+    }
+    h2{
+        font-size: 1rem;
+        font-weight: 700;
+        // color: #0E67B4;
+    }
     .tabs-component-tabs {
         width: 100vw;
         display: flex;

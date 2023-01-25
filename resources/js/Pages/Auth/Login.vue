@@ -11,6 +11,8 @@ import { Head, Link, useForm } from '@inertiajs/vue3';
 defineProps({
     canResetPassword: Boolean,
     status: String,
+    canLogin: Boolean,
+    canRegister: Boolean,
 });
 
 const form = useForm({
@@ -27,7 +29,7 @@ const submit = () => {
 </script>
 
 <template>
-    <GuestLayout>
+    <GuestLayout canRegister="canRegister" canLogin=false>
         <Head title="Log in" />
 
         <div>
@@ -93,5 +95,8 @@ const submit = () => {
                 </PrimaryButton>
             </div>
         </form>
+
+
+       
     </GuestLayout>
 </template>

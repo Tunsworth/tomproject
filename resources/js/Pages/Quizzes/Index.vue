@@ -25,13 +25,7 @@ function destroy(id) {
                 <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                     <div class="p-6 bg-white border-b border-gray-200">
                         <div className="flex items-center justify-between">
-                            <ApplicationLogo class="w-100 h-100  fill-current text-gray-500" />
-                            <!-- <Link
-                                className="px-6 py-2 text-white bg-green-500 rounded-md focus:outline-none"
-                                :href="route('quizzes.create')"
-                            >
-                                Create quiz
-                            </Link> -->
+                            <img  src="/images/hero3.png" class="w-100 h-100  fill-current text-gray-500" />
                         </div>
                     </div>
                 </div>
@@ -46,7 +40,7 @@ function destroy(id) {
                                 </div>
                                 <div class="flexflex-row space-between">
                                     <h3>Category: {{ quiz.category.title}}</h3>
-                                    <div>
+                                    <div v-if="$page.props.auth.roles.includes('edit')" >
                                         <Link
                                             tabIndex="1"
                                             className="px-4 py-2 text-sm text-white bg-blue-500 rounded"

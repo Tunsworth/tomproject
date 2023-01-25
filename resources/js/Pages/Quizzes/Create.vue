@@ -9,6 +9,9 @@
                 <Link className="px-6 py-2 text-white bg-blue-500 rounded-md focus:outline-none" :href="route('quizzes.index')">Back</Link>
             </div>
         </template>
+
+
+        <CategoryModal :show="showCatOptions" @close="showCatOptions = false" ></CategoryModal>
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
@@ -26,12 +29,7 @@
                             </li>
                         </ul>
                     </div> 
-                    <div class="p-6 bg-white border-b border-gray-200">
-                        
-                        <div className="flex items-center  mb-6">
-                       
-                        </div>
-                        
+                    <div class="p-6 bg-white border-b border-gray-200">                    
                         <form name="createForm" @submit.prevent="submit">
                                 <div v-if="pageTab == 'information'" className="flex flex-col">
                                     <div className="mb-4">
@@ -48,7 +46,6 @@
                                     </div>
                                     <div className="mb-4">
                                         <Label for="description" value="Description" />
-                                        
                                         <TextArea 
                                             id="body" 
                                             class="mt-1 block w-full" 
@@ -59,7 +56,10 @@
                                         </span>
                                     </div>
                                     <div className="mb-4">
-                                        <Label for="category" value="Category" />
+                                        <div class="flex  justify-between" >
+                                        <Label for="category" value="Category" /> 
+                                        <button @click.prevent="newCategory()">Create New Category</button>
+                                        </div>
                                         <select v-model="form.category_id" class="form-control mt-1 block w-full">
                                             <option v-for="option in categories" :value="option.id">
                                                 {{ option.title}}
@@ -68,6 +68,41 @@
                                         <span className="text-red-600" v-if="form.errors.category_id">
                                             {{ form.errors.category_id }}
                                         </span>
+                                    </div>
+
+                                    <div v-if="showCatOptions">
+
+                                        <!-- <form name="createForm" @submit.prevent="submitNewCategory">
+                                            <div className="mb-4">
+                                                <Label for="category_title" value="Category Title" />
+                                                <Input 
+                                                    id="title" 
+                                                    type="text" 
+                                                    class="mt-1 block w-full" 
+                                                    v-model="categoryForm.title" 
+                                                    autofocus />
+                                                <span className="text-red-600" v-if="categoryForm.errors.title">
+                                                    {{ categoryForm.errors.title }}
+                                                </span>
+                                            </div>
+                                            <div className="mb-4">
+                                                <Label for="category_description" value="Category Description" />
+                                                <TextArea 
+                                                    id="body" 
+                                                    class="mt-1 block w-full" 
+                                                    v-model="categoryForm.description" 
+                                                    autofocus />
+                                                <span className="text-red-600" v-if="categoryForm.errors.description">
+                                                    {{ categoryForm.errors.description }}
+                                                </span>
+                                            </div>  
+                                            <button @submit.prevent="submitNewCategory"
+                                                type="submit"
+                                                className="px-6 py-2 font-bold text-white bg-green-500 rounded"
+                                            >
+                                                    Save
+                                            </button>      
+                                        </form> -->
                                     </div>
                                     <div class="flex justify-end">
                                         <button className="px-6 py-2 text-white bg-green-500 rounded-md focus:outline-none" v-if="questions.length == 0" @click.prevent="startQuestion(index)">Add Questions</button>
@@ -162,6 +197,7 @@ import TextArea from '@/Components/Textarea.vue';
 import DropDown from '@/Components/Dropdown.vue';
 import DropdownLink from '@/Components/DropdownLink.vue';
 import Checkbox from '@/Components/Checkbox.vue';
+import CategoryModal from '@/Components/CategoryModal.vue'
 import { Head, Link, useForm, router } from '@inertiajs/vue3';
 
 
@@ -169,6 +205,7 @@ const addQuestion = ref(false);
 const questionIndex = ref(0);
 const questions = ref([]);
 const pageTab = ref('information')
+const showCatOptions = ref(false)
 
 defineProps({
     categories: Array,
@@ -186,6 +223,18 @@ const form = useForm({
                 question:'',
             }]
     });
+
+const categoryForm = useForm({
+    title: '',
+    description: '',
+    
+});
+
+
+const newCategory = () => {
+    showCatOptions.value = true
+}
+
 
 const submit = () => {
     form.post(route('quizzes.store'));
