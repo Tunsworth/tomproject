@@ -15,11 +15,7 @@ function destroy(id) {
 <template>
     <Head title="Dashboard" />
     <BreezeAuthenticatedLayout>
-        <!-- <template #header>
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                <ApplicationLogo class="w-100 h-100 p-6 fill-current text-gray-500" />
-            </h2>
-        </template> -->
+
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
@@ -29,17 +25,17 @@ function destroy(id) {
                         </div>
                     </div>
                 </div>
-                <div v-if="quizzes">
+                <div v-if="quizzes && quizzes.length > 0">
                     <div v-for="quiz in quizzes" class="card bg-white overflow-hidden shadow-sm sm:rounded-lg my-4">
                         <Link :href="route('quizzes.show', quiz.id)" >
                         <div class="p-6 bg-white border-b border-gray-200">
                             <div class="flex content-start justify-between">
                                 <div>
-                                    <h1>{{ quiz.title }}</h1>
-                                    <h2>{{ quiz.description }}</h2>
+                                    <h1><span>Title: </span>{{ quiz.title }}</h1>
+                                    <h2><span>Description: </span>{{ quiz.description }}</h2>
                                 </div>
                                 <div class="flexflex-row space-between">
-                                    <h3>Category: {{ quiz.category.title}}</h3>
+                                    <h2>Category: {{ quiz.category.title}}</h2>
                                     <div v-if="$page.props.auth.roles.includes('edit')" >
                                         <Link
                                             tabIndex="1"
@@ -65,7 +61,27 @@ function destroy(id) {
 
                     </div>
                 </div>
-               
+                <div v-else>
+                    <div class="card bg-white overflow-hidden shadow-sm sm:rounded-lg my-4">
+                        <div class="p-6 bg-white border-b border-gray-200">
+                            <div class="flex flex-col items-center">
+                                <div>
+                                    Currently no quizzes have been created!
+                                </div>
+                          
+                                
+                                    <Link  v-if="$page.props.auth.roles.includes('edit')"
+                                    className="px-6 py-2 mt-6 text-white bg-green-500 rounded-md focus:outline-none"
+                                    :href="route('quizzes.create')"
+                                        >
+                                            Create the first Quiz!
+                                    </Link>
+                          
+                              
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </BreezeAuthenticatedLayout>

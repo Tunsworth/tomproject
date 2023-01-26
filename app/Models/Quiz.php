@@ -34,9 +34,14 @@ class Quiz extends Model
             'description' => $this->description,
             'category' => $this->category()->first(),
             'questions' => $this->questions->map(function ($item){
-                 return [ 'answers' => $item->answers, 'question' => $item->question];
-            })
+                 return [ 'id' => $item->id, 'answers' => $item->answers, 'question' => $item->question];
+            }),
+            'questionCount' => $this->questions->count()
         ];
+    }
+
+    public function questionCount(){
+        return $this->questions->count();
     }
 
 }

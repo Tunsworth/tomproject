@@ -4,7 +4,7 @@ namespace App\Rules;
 
 use Illuminate\Contracts\Validation\Rule;
 
-class OneCorrect implements Rule
+class BetweenThreeAndFive implements Rule
 {
     /**
      * Create a new rule instance.
@@ -26,16 +26,9 @@ class OneCorrect implements Rule
     public function passes($attribute, $value)
     {
         $collection = collect($value);
-        $check = $collection->filter( function ($item) {
-            if(array_key_exists('correct_answer', $item)){
-                if($item['correct_answer'] ==  true){
-                    return true;
-                }  
-            }
-        });
-        if ($check->count() > 0){
+        if($collection->count() >=3 && $collection->count() <=5 ){
             return true;
-        }
+        };
     }
 
     /**
@@ -45,6 +38,6 @@ class OneCorrect implements Rule
      */
     public function message()
     {
-        return 'At least one answer must be marked as correct';
+        return '3 to 5 answers must be provided';
     }
 }

@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Category;
+use App\Models\Answer;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
 
-class CategoryController extends Controller
+class AnswerController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -25,7 +24,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-
+        //
     }
 
     /**
@@ -36,17 +35,7 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        Validator::make($request->all(), [
-            'title' => ['required'],
-            'description' => ['required']
-        ]
-        )->validate();
-
-        $data = $request->all();
-        $category = Category::firstOrCreate([
-            'title' => $data['title'],
-            'description' => $data['description']]
-        );
+        //
     }
 
     /**
@@ -91,6 +80,7 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        //
+        dd("hi");
+        Answer::find($id)->delete();
     }
 }

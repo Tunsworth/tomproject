@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\QuizRequest;
+use App\Models\Answer;
 use App\Models\Category;
+use App\Models\Question;
 use App\Models\Quiz;
+use App\Rules\BetweenThreeAndFive;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Inertia\Inertia;
@@ -17,8 +21,6 @@ class QuizController extends Controller
         $this->middleware('role:edit')->only('store', 'edit', 'update', 'destroy');
     }
 
-
-
     /**
      * Display a listing of the resource.
      *
@@ -26,6 +28,7 @@ class QuizController extends Controller
      */
     public function index()
     {
+
         $quizzes = Quiz::with('Category:id,title')->get();
         return Inertia::render('Quizzes/Index', ['quizzes' => $quizzes]);
     }
@@ -47,44 +50,21 @@ class QuizController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(QuizRequest $request)
     {
-      
-        Validator::make($request->all(), [
-            'title' => ['required'],
-            'description' => ['required'],
-            'category_id' => ['required'],
-            'questions' =>['required'],
-            'questions.*.question' => ['required'],
-            'questions.*.answers.*.answer' => ['required'],
-            'questions.*.answers' => ['required', new OneCorrect],
-            // 'questions.*.answers.*.correct_answer' => ['required', new OneCorrect],
-            // 'questions.*.answers.*.correct_answer' => ['required_if:questions.*.answers.*.correct_answer,true'],
-        ],[
-            'questions.*.answers.*.correct_answer' => 'At least one answer must be marked as true',
-            'questions.*.question' => 'Question is required',
-            'questions.*.answers.*.answer' => 'Answer is required',            
-        ]
-        )->validate();
-
         $data = $request->all();
 
         $quiz = Quiz::firstOrCreate([
-            'title' => $data['title'],
-            'description' => $data['description'],
+            'title' => ucfirst($data['title']),
+            'description' => ucfirst($data['description']),
             'category_id' => $data['category_id']],
         );
-        
+    
         collect($data['questions'])->map(function ($question) use ($quiz) {
             $question_record = $quiz->questions()->create($question);
-            // dd($question['answers']);
             $question_record->answers()->createMany($question['answers']);
-        });
+        });   
 
-        // $questions = $quiz->questions()->createMany($data['questions']);
-
-        // $answers = $questions;
-    
         return redirect()->route('quizzes.index');
     }
 
@@ -123,46 +103,48 @@ class QuizController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(QuizRequest $request, $id)
     {
-
-        Validator::make($request->all(), [
-            'title' => ['required'],
-            'description' => ['required'],
-            'category_id' => ['required'],
-            'questions.*.question' => ['required'],
-            'questions.*.answers.*.answer' => ['required'],
-            'questions.*.answers.*.correct_answer' => ['required'],
-        ],[
-            'questions.*.question' => 'Question is required',
-            'questions.*.answers.*.answer' => 'Answer is required',            
-        ]
-        )->validate();
-
         $data = $request->all();
 
         $quiz = Quiz::updateOrCreate(
             [ 'id' => $id ],
-            [
-            'title' => $data['title'],
-            'description' => $data['description'],
-            'category_id' => $data['category_id'],
-            ],
+            ['title' => $data['title'],'description' => $data['description'],'category_id' => $data['category_id']],
         );
 
-        collect($data['questions'])->map(function ($question) use ($quiz) {
-            $question_record = $quiz->questions()->create($question);
-            // dd($question['answers']);
-            $question_record->answers()->createMany($question['answers']);
-        });
-        // Quiz::find($id)->update($request->all());
+        $questions = collect($data['questions'])->map(function ($question) use ($quiz){
+            return['id' => $question['id'], 'quiz_id' => $quiz->id ,'question' => $question['question']];
+        })->toArray();
+
+
+        $answers = collect($data['questions'])->flatMap(function ($question){
+
+            // $currentAnswers = Answer::where('question_id', $question['id'])->get();
+           $newAnwsers = collect($question['answers'])->map(function ($answer) use ($question){
+            // get the awnsers for that question 
+            // if there is no array key we need to create a new record
+            if(array_key_exists('id', $answer) == false){
+                // dd($answer);
+               $newInsert = Answer::updateOrCreate(
+                    ['answer' => $answer['answer'],
+                    'question_id' => $question['id']]
+                );
+            } else {
+                return ['id' => $answer['id'], 'question_id' => $answer['question_id'], 'answer' => $answer['answer'], 'correct_answer' => $answer['correct_answer']];
+            }
+            });
+            return $newAnwsers; 
 
 
 
 
+        })->filter()->toArray();
+        // dd($answers);
+        $quiz->questions()->upsert($questions, ['id'],['question']);
+        Answer::upsert($answers, ['id'],['answer', 'correct_answer']);
 
-
-        return redirect()->route('quizzes.index');
+        //pass quiz updated allert back
+        // return redirect()->route('quizzes.index');
     }
 
     /**

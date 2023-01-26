@@ -25,4 +25,8 @@ class Question extends Model
         return $this->hasOne(Answer::class)->where('id' == $this->answer_id);
     }
 
+    public function formatQuestion(){
+        return [ 'answers' => $this->answers, 'question' => $this->question];
+    }
+
 }

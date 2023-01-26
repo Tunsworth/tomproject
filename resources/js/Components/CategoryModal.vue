@@ -45,6 +45,9 @@ const categoryForm = useForm({
 
 const submitNewCategory = () => {
     categoryForm.post(route('categories.store'));
+    if(!categoryForm.errors){
+        close(); 
+    }
 };
 
 const close = () => {

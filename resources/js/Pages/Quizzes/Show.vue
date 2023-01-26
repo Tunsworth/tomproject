@@ -31,7 +31,7 @@
                                 <h2>Questions: {{ quiz.questions.length  }}</h2>
                             </div>
                             <div class="flexflex-row space-between">
-                                <h3>Category: {{ quiz.category.title}}</h3>
+                                <h2>Category: {{ quiz.category.title}}</h2>
                                 <div v-if="$page.props.auth.roles.includes('edit')">
                                     <Link
                                         tabIndex="1"
@@ -51,25 +51,27 @@
                                 </div>
                             </div>
                         </div>
-                        <div v-else-if="page != 'information'">
+                        <div v-else-if="pageTab != 'information'">
                           <div v-for="(question , index) in quiz.questions" :key="index">
                               <div>
                                   <div className="mb-4">
                                       <Label for="question" :value="`Question ${index+1}`" />
                                       <h1>{{question.question}}</h1>
-                                      <!-- add check to only show answers if view or edit  -->
                                       <div v-if="!$page.props.auth.roles.includes('restricted')" >
-
-                                            <Label for="question" :value="`Reveal Answers`" /> <button @click="showAnswer(index)" >reveal </button>
-                                            <div v-if="revealAnswer[index] == true"> 
-                                                <div class="flex " v-for="(answer, number) in question.answers">
-                                                <div >{{ number + 1 }}. {{ answer.answer }}</div>
+                                        <div class="grid justify-items-end">
+                                            <button class="px-2 text-white bg-green-500 rounded-md focus:outline-none text-sm" @click.prevent="showAnswer(index)">
+                                                <span v-if="!revealAnswer.includes(index)" >Reveal Answers</span>
+                                                <span v-else >Hide Answers</span>
+                                            </button> 
+                                        </div>
+                                            <div v-if="revealAnswer.includes(index)" class="answers p-4 mt-4" > 
+                                                <div class="" v-for="(answer, number) in question.answers">   
+                                                    <div class="flex py-2">
+                                                        <div :class="answer.correct_answer == true ? 'marked-as-correct' : '' ">{{ getLetter(number) }}. {{ answer.answer }}</div>
+                                                    </div>
+                                                </div>   
                                             </div>
-                                            </div>
-                                        
-
                                       </div>
-                                     
                                   </div>
                               </div>
                           </div>
@@ -95,7 +97,9 @@ const props = defineProps({
 });
 
 const pageTab = ref('information');
-const revealAnswer = ref([])
+// const revealAnswer = reactive([{question: '', value: ''}])
+const revealAnswer = reactive([])
+
 
 const  changeTab = () => {
     if(pageTab.value == 'information'){
@@ -105,21 +109,43 @@ const  changeTab = () => {
     }   
 };
 
+const getLetter= (index) => {
+    let letters = ['A','B','C','D','E']
+    let letter = letters[index]
+    return letter
+}
+
 const showAnswer = (index) => {
-    if(revealAnswer[index].value == true){
-        revealAnswer.push([{
-          
-        }
-        ])
+    if(revealAnswer.includes(index)){
+        const idx = revealAnswer.findIndex(item => {
+            return item === index;
+        });
+        revealAnswer.splice(idx,1) 
     }else {
-        revealAnswer[index].true = false
-    }   
-};
+        revealAnswer.push(index)  
+    }
+}
 
 
 </script>
 
 <style lang="scss" scoped>
+.answers{
+    column-count: 2;  
+    border-radius:5px 5px 5px 5px ;
+    border: 1px solid #efefef;
+    // background: #F8FAFC !important;
+    box-shadow:inset 1px 1px 4px #efefef;
+    box-shadow: 0px 0px 3px #0E67B4;
+    outline: none;
+}
+.marked-as-correct {
+    color: #19c52b;
+    font-weight: 900;
+    // text-shadow:1px 1px 1px #6fce79;
+
+}
+
 
     h1{
         font-size: 1.2rem;
