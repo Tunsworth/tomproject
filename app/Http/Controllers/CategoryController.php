@@ -44,8 +44,8 @@ class CategoryController extends Controller
 
         $data = $request->all();
         $category = Category::firstOrCreate([
-            'title' => $data['title'],
-            'description' => $data['description']]
+            'title' => ucfirst($data['title']),
+            'description' => ucfirst($data['description'])]
         );
     }
 

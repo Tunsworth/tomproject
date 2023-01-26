@@ -45,4 +45,3 @@ require __DIR__.'/auth.php';
 
 Route::resource('quizzes', QuizController::class);
 Route::resource('categories', CategoryController::class);
-Route::resource('answers', AnswerController::class);

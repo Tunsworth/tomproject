@@ -109,22 +109,49 @@ class QuizController extends Controller
 
         $quiz = Quiz::updateOrCreate(
             [ 'id' => $id ],
-            ['title' => $data['title'],'description' => $data['description'],'category_id' => $data['category_id']],
+            ['title' => ucfirst($data['title']),'description' => ucfirst($data['description']),'category_id' => $data['category_id']],
         );
-
-        $questions = collect($data['questions'])->map(function ($question) use ($quiz){
-            return['id' => $question['id'], 'quiz_id' => $quiz->id ,'question' => $question['question']];
+         $questions = collect($data['questions'])->map(function ($question) use ($quiz){
+            if(array_key_exists('id', $question)){
+                return['id' => $question['id'], 'quiz_id' => $quiz->id ,'question' => $question['question']];
+            }else{
+                $newInsert = Question::updateOrCreate(
+                    ['question' => $question['question'],
+                    'quiz_id' => $quiz['id']]
+                );
+                $newInsert->answers()->createMany($question['answers']);;
+                return ['id' => $newInsert->id, 'quiz_id' => $quiz['id'] ,'question' => $newInsert->question];
+            }
         })->toArray();
 
+        $removeQuestion = collect($questions)->map(function ($item){
+            if(array_key_exists('id', $item)){
+                return  $item['id'];
+            }
+        })->filter()->toArray();
+
+        $questionsToRemove = Question::where('quiz_id', $quiz->id)->whereNotIn('id',$removeQuestion)->get();
+        if($questionsToRemove != null){
+            $questionsToRemove->map(function ($question) {
+                Answer::whereIn('id', $question->answers->pluck('id'))->delete();
+            });
+                Question::whereIn('id', $questionsToRemove->pluck('id'))->delete();
+        }
 
         $answers = collect($data['questions'])->flatMap(function ($question){
-
-            // $currentAnswers = Answer::where('question_id', $question['id'])->get();
+            if(array_key_exists('id', $question)){
+            //remove answers if they have not been passed    
+            $remove = collect($question['answers'])->map(function ($answer){
+                if(array_key_exists('id', $answer)){
+                    return $answer['id'];
+                }
+            })->filter()->toArray();
+           if($remove != null){
+                Answer::where('question_id', $question['id'])->whereNotIn('id', $remove)->delete();
+           }
+          
            $newAnwsers = collect($question['answers'])->map(function ($answer) use ($question){
-            // get the awnsers for that question 
-            // if there is no array key we need to create a new record
             if(array_key_exists('id', $answer) == false){
-                // dd($answer);
                $newInsert = Answer::updateOrCreate(
                     ['answer' => $answer['answer'],
                     'question_id' => $question['id']]
@@ -134,17 +161,10 @@ class QuizController extends Controller
             }
             });
             return $newAnwsers; 
-
-
-
-
+        }
         })->filter()->toArray();
-        // dd($answers);
         $quiz->questions()->upsert($questions, ['id'],['question']);
         Answer::upsert($answers, ['id'],['answer', 'correct_answer']);
-
-        //pass quiz updated allert back
-        // return redirect()->route('quizzes.index');
     }
 
     /**
