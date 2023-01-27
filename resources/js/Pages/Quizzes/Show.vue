@@ -151,8 +151,6 @@ const destroy = (id) => {
     // text-shadow:1px 1px 1px #6fce79;
 
 }
-
-
     h1{
         font-size: 1.2rem;
         font-weight: 900;
