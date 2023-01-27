@@ -1,0 +1,1 @@
+import{o as s,f as r}from"./app-53947144.js";const _=(o,t)=>{const c=o.__vccOpts||o;for(const[e,n]of t)c[e]=n;return c},a={},i={src:"/images/WebbiSkools-logo.png"};function p(o,t){return s(),r("img",i)}const l=_(a,[["render",p]]);export{l as A,_};
