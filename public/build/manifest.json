@@ -1,286 +1,286 @@
 {
-  "QuizForm.css": {
-    "file": "assets/QuizForm-daab45c2.css",
-    "src": "QuizForm.css"
-  },
   "resources/js/Pages/Quizzes/Show.css": {
     "file": "assets/Show-a3839772.css",
     "src": "resources/js/Pages/Quizzes/Show.css"
-  },
-  "resources/js/Pages/Quizzes/Index.css": {
-    "file": "assets/Index-ca921994.css",
-    "src": "resources/js/Pages/Quizzes/Index.css"
   },
   "resources/js/app.css": {
     "file": "assets/app-2cbe0505.css",
     "src": "resources/js/app.css"
   },
+  "resources/js/Pages/Quizzes/Index.css": {
+    "file": "assets/Index-ca921994.css",
+    "src": "resources/js/Pages/Quizzes/Index.css"
+  },
+  "QuizForm.css": {
+    "file": "assets/QuizForm-daab45c2.css",
+    "src": "QuizForm.css"
+  },
   "resources/js/Pages/Profile/Edit.vue": {
-    "file": "assets/Edit-2bffd21c.js",
+    "file": "assets/Edit-43921624.js",
     "src": "resources/js/Pages/Profile/Edit.vue",
     "isDynamicEntry": true,
     "imports": [
-      "_AuthenticatedLayout-5e15c7dd.js",
+      "_AuthenticatedLayout-9bd095a6.js",
       "resources/js/Pages/Profile/Partials/DeleteUserForm.vue",
       "resources/js/Pages/Profile/Partials/UpdatePasswordForm.vue",
       "resources/js/Pages/Profile/Partials/UpdateProfileInformationForm.vue",
       "resources/js/app.js",
-      "_ApplicationLogo-439b48b4.js",
-      "_InputError-bbcc523b.js",
-      "_InputLabel-071afcaf.js",
-      "_TextInput-a49c9a9a.js",
-      "_PrimaryButton-eb3f815b.js"
+      "_ApplicationLogo-ccc6c358.js",
+      "_InputError-04f1fe09.js",
+      "_InputLabel-be7b3b73.js",
+      "_TextInput-93ba3346.js",
+      "_PrimaryButton-20172ba2.js"
     ]
   },
-  "_InputLabel-071afcaf.js": {
-    "file": "assets/InputLabel-071afcaf.js",
+  "_TextInput-93ba3346.js": {
+    "file": "assets/TextInput-93ba3346.js",
     "imports": [
       "resources/js/app.js"
     ]
   },
-  "resources/js/Pages/Profile/Partials/UpdatePasswordForm.vue": {
-    "file": "assets/UpdatePasswordForm-645ab737.js",
-    "src": "resources/js/Pages/Profile/Partials/UpdatePasswordForm.vue",
-    "isDynamicEntry": true,
-    "imports": [
-      "resources/js/app.js",
-      "_InputError-bbcc523b.js",
-      "_InputLabel-071afcaf.js",
-      "_PrimaryButton-eb3f815b.js",
-      "_TextInput-a49c9a9a.js"
-    ]
-  },
-  "_GuestLayout-9c0401ef.js": {
-    "file": "assets/GuestLayout-9c0401ef.js",
-    "imports": [
-      "resources/js/app.js"
-    ]
-  },
-  "resources/js/Pages/Auth/ForgotPassword.vue": {
-    "file": "assets/ForgotPassword-51a84615.js",
-    "src": "resources/js/Pages/Auth/ForgotPassword.vue",
-    "isDynamicEntry": true,
-    "imports": [
-      "resources/js/app.js",
-      "_GuestLayout-9c0401ef.js",
-      "_InputError-bbcc523b.js",
-      "_InputLabel-071afcaf.js",
-      "_PrimaryButton-eb3f815b.js",
-      "_TextInput-a49c9a9a.js"
-    ]
-  },
-  "_Checkbox-d1ddf446.js": {
-    "file": "assets/Checkbox-d1ddf446.js",
+  "_ApplicationLogo-ccc6c358.js": {
+    "file": "assets/ApplicationLogo-ccc6c358.js",
     "imports": [
       "resources/js/app.js"
     ]
   },
   "resources/js/Pages/Quizzes/Create.vue": {
-    "file": "assets/Create-f786780b.js",
+    "file": "assets/Create-5a54ad67.js",
     "src": "resources/js/Pages/Quizzes/Create.vue",
     "isDynamicEntry": true,
     "imports": [
-      "_AuthenticatedLayout-5e15c7dd.js",
+      "_AuthenticatedLayout-9bd095a6.js",
       "resources/js/app.js",
-      "_QuizForm-aae4f376.js",
-      "_ApplicationLogo-439b48b4.js",
-      "_InputLabel-071afcaf.js",
-      "_TextInput-a49c9a9a.js",
-      "_Checkbox-d1ddf446.js"
+      "_QuizForm-06963d7b.js",
+      "_ApplicationLogo-ccc6c358.js",
+      "_InputLabel-be7b3b73.js",
+      "_TextInput-93ba3346.js",
+      "_Checkbox-7ae6940c.js"
     ]
   },
-  "resources/js/Pages/Auth/ResetPassword.vue": {
-    "file": "assets/ResetPassword-73dc156e.js",
-    "src": "resources/js/Pages/Auth/ResetPassword.vue",
-    "isDynamicEntry": true,
-    "imports": [
-      "resources/js/app.js",
-      "_GuestLayout-9c0401ef.js",
-      "_InputError-bbcc523b.js",
-      "_InputLabel-071afcaf.js",
-      "_PrimaryButton-eb3f815b.js",
-      "_TextInput-a49c9a9a.js"
-    ]
-  },
-  "_InputError-bbcc523b.js": {
-    "file": "assets/InputError-bbcc523b.js",
+  "_InputLabel-be7b3b73.js": {
+    "file": "assets/InputLabel-be7b3b73.js",
     "imports": [
       "resources/js/app.js"
     ]
   },
-  "_ApplicationLogo-439b48b4.js": {
-    "file": "assets/ApplicationLogo-439b48b4.js",
-    "imports": [
-      "resources/js/app.js"
-    ]
-  },
-  "resources/js/Pages/Auth/ConfirmPassword.vue": {
-    "file": "assets/ConfirmPassword-fe7e4d54.js",
-    "src": "resources/js/Pages/Auth/ConfirmPassword.vue",
+  "resources/js/Pages/Profile/Partials/UpdateProfileInformationForm.vue": {
+    "file": "assets/UpdateProfileInformationForm-d2c67933.js",
+    "src": "resources/js/Pages/Profile/Partials/UpdateProfileInformationForm.vue",
     "isDynamicEntry": true,
     "imports": [
       "resources/js/app.js",
-      "_GuestLayout-9c0401ef.js",
-      "_InputError-bbcc523b.js",
-      "_InputLabel-071afcaf.js",
-      "_PrimaryButton-eb3f815b.js",
-      "_TextInput-a49c9a9a.js"
+      "_InputError-04f1fe09.js",
+      "_InputLabel-be7b3b73.js",
+      "_PrimaryButton-20172ba2.js",
+      "_TextInput-93ba3346.js"
+    ]
+  },
+  "resources/js/Pages/Auth/VerifyEmail.vue": {
+    "file": "assets/VerifyEmail-08e9d879.js",
+    "src": "resources/js/Pages/Auth/VerifyEmail.vue",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.js",
+      "_GuestLayout-11f77d25.js",
+      "_PrimaryButton-20172ba2.js"
     ]
   },
   "resources/js/Pages/Welcome.vue": {
-    "file": "assets/Welcome-562b1530.js",
+    "file": "assets/Welcome-def4931c.js",
     "src": "resources/js/Pages/Welcome.vue",
     "isDynamicEntry": true,
     "imports": [
       "resources/js/app.js"
     ]
   },
-  "resources/js/Pages/Auth/Register.vue": {
-    "file": "assets/Register-13f06029.js",
-    "src": "resources/js/Pages/Auth/Register.vue",
-    "isDynamicEntry": true,
+  "_GuestLayout-11f77d25.js": {
+    "file": "assets/GuestLayout-11f77d25.js",
     "imports": [
-      "resources/js/app.js",
-      "_ApplicationLogo-439b48b4.js",
-      "_GuestLayout-9c0401ef.js",
-      "_InputError-bbcc523b.js",
-      "_InputLabel-071afcaf.js",
-      "_PrimaryButton-eb3f815b.js",
-      "_TextInput-a49c9a9a.js"
-    ]
-  },
-  "resources/js/Pages/Auth/VerifyEmail.vue": {
-    "file": "assets/VerifyEmail-d09a9545.js",
-    "src": "resources/js/Pages/Auth/VerifyEmail.vue",
-    "isDynamicEntry": true,
-    "imports": [
-      "resources/js/app.js",
-      "_GuestLayout-9c0401ef.js",
-      "_PrimaryButton-eb3f815b.js"
-    ]
-  },
-  "resources/js/Pages/Auth/Login.vue": {
-    "file": "assets/Login-a53f3c44.js",
-    "src": "resources/js/Pages/Auth/Login.vue",
-    "isDynamicEntry": true,
-    "imports": [
-      "resources/js/app.js",
-      "_ApplicationLogo-439b48b4.js",
-      "_Checkbox-d1ddf446.js",
-      "_GuestLayout-9c0401ef.js",
-      "_InputError-bbcc523b.js",
-      "_InputLabel-071afcaf.js",
-      "_PrimaryButton-eb3f815b.js",
-      "_TextInput-a49c9a9a.js"
+      "resources/js/app.js"
     ]
   },
   "resources/js/Pages/Profile/Partials/DeleteUserForm.vue": {
-    "file": "assets/DeleteUserForm-8cb5751c.js",
+    "file": "assets/DeleteUserForm-53a0b8fc.js",
     "src": "resources/js/Pages/Profile/Partials/DeleteUserForm.vue",
     "isDynamicEntry": true,
     "imports": [
       "resources/js/app.js",
-      "_InputError-bbcc523b.js",
-      "_InputLabel-071afcaf.js",
-      "_TextInput-a49c9a9a.js"
+      "_InputError-04f1fe09.js",
+      "_InputLabel-be7b3b73.js",
+      "_TextInput-93ba3346.js"
     ]
   },
-  "resources/js/Pages/Profile/Partials/UpdateProfileInformationForm.vue": {
-    "file": "assets/UpdateProfileInformationForm-e907da8d.js",
-    "src": "resources/js/Pages/Profile/Partials/UpdateProfileInformationForm.vue",
+  "_Checkbox-7ae6940c.js": {
+    "file": "assets/Checkbox-7ae6940c.js",
+    "imports": [
+      "resources/js/app.js"
+    ]
+  },
+  "_PrimaryButton-20172ba2.js": {
+    "file": "assets/PrimaryButton-20172ba2.js",
+    "imports": [
+      "resources/js/app.js"
+    ]
+  },
+  "_InputError-04f1fe09.js": {
+    "file": "assets/InputError-04f1fe09.js",
+    "imports": [
+      "resources/js/app.js"
+    ]
+  },
+  "resources/js/Pages/Auth/Login.vue": {
+    "file": "assets/Login-2c7b516d.js",
+    "src": "resources/js/Pages/Auth/Login.vue",
     "isDynamicEntry": true,
     "imports": [
       "resources/js/app.js",
-      "_InputError-bbcc523b.js",
-      "_InputLabel-071afcaf.js",
-      "_PrimaryButton-eb3f815b.js",
-      "_TextInput-a49c9a9a.js"
+      "_ApplicationLogo-ccc6c358.js",
+      "_Checkbox-7ae6940c.js",
+      "_GuestLayout-11f77d25.js",
+      "_InputError-04f1fe09.js",
+      "_InputLabel-be7b3b73.js",
+      "_PrimaryButton-20172ba2.js",
+      "_TextInput-93ba3346.js"
     ]
   },
-  "_TextInput-a49c9a9a.js": {
-    "file": "assets/TextInput-a49c9a9a.js",
+  "resources/js/Pages/Profile/Partials/UpdatePasswordForm.vue": {
+    "file": "assets/UpdatePasswordForm-35e7fc91.js",
+    "src": "resources/js/Pages/Profile/Partials/UpdatePasswordForm.vue",
+    "isDynamicEntry": true,
     "imports": [
-      "resources/js/app.js"
-    ]
-  },
-  "_PrimaryButton-eb3f815b.js": {
-    "file": "assets/PrimaryButton-eb3f815b.js",
-    "imports": [
-      "resources/js/app.js"
-    ]
-  },
-  "_AuthenticatedLayout-5e15c7dd.js": {
-    "file": "assets/AuthenticatedLayout-5e15c7dd.js",
-    "imports": [
-      "_ApplicationLogo-439b48b4.js",
-      "resources/js/app.js"
+      "resources/js/app.js",
+      "_InputError-04f1fe09.js",
+      "_InputLabel-be7b3b73.js",
+      "_PrimaryButton-20172ba2.js",
+      "_TextInput-93ba3346.js"
     ]
   },
   "resources/js/Pages/Quizzes/Edit.vue": {
-    "file": "assets/Edit-3aed69e4.js",
+    "file": "assets/Edit-d4c7977c.js",
     "src": "resources/js/Pages/Quizzes/Edit.vue",
     "isDynamicEntry": true,
     "imports": [
-      "_AuthenticatedLayout-5e15c7dd.js",
-      "_QuizForm-aae4f376.js",
+      "_AuthenticatedLayout-9bd095a6.js",
+      "_QuizForm-06963d7b.js",
       "resources/js/app.js",
-      "_ApplicationLogo-439b48b4.js",
-      "_InputLabel-071afcaf.js",
-      "_TextInput-a49c9a9a.js",
-      "_Checkbox-d1ddf446.js"
+      "_ApplicationLogo-ccc6c358.js",
+      "_InputLabel-be7b3b73.js",
+      "_TextInput-93ba3346.js",
+      "_Checkbox-7ae6940c.js"
     ]
   },
-  "_index-a475b3ed.js": {
-    "file": "assets/index-a475b3ed.js",
+  "resources/js/Pages/Auth/Register.vue": {
+    "file": "assets/Register-3de08aaa.js",
+    "src": "resources/js/Pages/Auth/Register.vue",
+    "isDynamicEntry": true,
     "imports": [
+      "resources/js/app.js",
+      "_ApplicationLogo-ccc6c358.js",
+      "_GuestLayout-11f77d25.js",
+      "_InputError-04f1fe09.js",
+      "_InputLabel-be7b3b73.js",
+      "_PrimaryButton-20172ba2.js",
+      "_TextInput-93ba3346.js"
+    ]
+  },
+  "_AuthenticatedLayout-9bd095a6.js": {
+    "file": "assets/AuthenticatedLayout-9bd095a6.js",
+    "imports": [
+      "_ApplicationLogo-ccc6c358.js",
       "resources/js/app.js"
     ]
   },
+  "resources/js/Pages/Auth/ResetPassword.vue": {
+    "file": "assets/ResetPassword-67d094c5.js",
+    "src": "resources/js/Pages/Auth/ResetPassword.vue",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.js",
+      "_GuestLayout-11f77d25.js",
+      "_InputError-04f1fe09.js",
+      "_InputLabel-be7b3b73.js",
+      "_PrimaryButton-20172ba2.js",
+      "_TextInput-93ba3346.js"
+    ]
+  },
+  "resources/js/Pages/Auth/ForgotPassword.vue": {
+    "file": "assets/ForgotPassword-3bceeed1.js",
+    "src": "resources/js/Pages/Auth/ForgotPassword.vue",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.js",
+      "_GuestLayout-11f77d25.js",
+      "_InputError-04f1fe09.js",
+      "_InputLabel-be7b3b73.js",
+      "_PrimaryButton-20172ba2.js",
+      "_TextInput-93ba3346.js"
+    ]
+  },
+  "resources/js/Pages/Auth/ConfirmPassword.vue": {
+    "file": "assets/ConfirmPassword-8241725c.js",
+    "src": "resources/js/Pages/Auth/ConfirmPassword.vue",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.js",
+      "_GuestLayout-11f77d25.js",
+      "_InputError-04f1fe09.js",
+      "_InputLabel-be7b3b73.js",
+      "_PrimaryButton-20172ba2.js",
+      "_TextInput-93ba3346.js"
+    ]
+  },
   "resources/js/Pages/Quizzes/Show.vue": {
-    "file": "assets/Show-f2d48bcf.js",
+    "file": "assets/Show-0c84aa72.js",
     "src": "resources/js/Pages/Quizzes/Show.vue",
     "isDynamicEntry": true,
     "imports": [
       "resources/js/app.js",
-      "_AuthenticatedLayout-5e15c7dd.js",
-      "_InputLabel-071afcaf.js",
-      "_index-a475b3ed.js",
-      "_ApplicationLogo-439b48b4.js"
+      "_AuthenticatedLayout-9bd095a6.js",
+      "_InputLabel-be7b3b73.js",
+      "_index-9ec46687.js",
+      "_ApplicationLogo-ccc6c358.js"
     ],
     "css": [
       "assets/Show-a3839772.css"
     ]
   },
-  "_QuizForm-aae4f376.js": {
-    "file": "assets/QuizForm-aae4f376.js",
+  "_index-9ec46687.js": {
+    "file": "assets/index-9ec46687.js",
     "imports": [
-      "resources/js/app.js",
-      "_ApplicationLogo-439b48b4.js",
-      "_InputLabel-071afcaf.js",
-      "_TextInput-a49c9a9a.js",
-      "_Checkbox-d1ddf446.js"
-    ],
-    "css": [
-      "assets/QuizForm-daab45c2.css"
+      "resources/js/app.js"
     ]
   },
   "resources/js/Pages/Quizzes/Index.vue": {
-    "file": "assets/Index-cc8673a3.js",
+    "file": "assets/Index-ff8b93fc.js",
     "src": "resources/js/Pages/Quizzes/Index.vue",
     "isDynamicEntry": true,
     "imports": [
-      "_ApplicationLogo-439b48b4.js",
-      "_AuthenticatedLayout-5e15c7dd.js",
+      "_ApplicationLogo-ccc6c358.js",
+      "_AuthenticatedLayout-9bd095a6.js",
       "resources/js/app.js",
-      "_TextInput-a49c9a9a.js",
-      "_index-a475b3ed.js"
+      "_TextInput-93ba3346.js",
+      "_index-9ec46687.js"
     ],
     "css": [
       "assets/Index-ca921994.css"
     ]
   },
+  "_QuizForm-06963d7b.js": {
+    "file": "assets/QuizForm-06963d7b.js",
+    "imports": [
+      "resources/js/app.js",
+      "_ApplicationLogo-ccc6c358.js",
+      "_InputLabel-be7b3b73.js",
+      "_TextInput-93ba3346.js",
+      "_Checkbox-7ae6940c.js"
+    ],
+    "css": [
+      "assets/QuizForm-daab45c2.css"
+    ]
+  },
   "resources/js/app.js": {
-    "file": "assets/app-53947144.js",
+    "file": "assets/app-cd00f026.js",
     "src": "resources/js/app.js",
     "isEntry": true,
     "dynamicImports": [
