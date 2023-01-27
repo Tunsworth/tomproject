@@ -29,9 +29,8 @@ const showingNavigationDropdown = ref(false);
 
                             <!-- Navigation Links -->
                             <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                                <NavLink :href="route('dashboard')" :active="route().current('dashboard')">
-                                    Dashboard
-                                </NavLink>
+                                <NavLink :href="route('quizzes.index')" :active="route().current('quizzes.index')">Quizzes</NavLink>
+                                <NavLink v-if="$page.props.auth.roles.includes('edit')"  :href="route('quizzes.create')" :active="route().current('quizzes.create')">Create Quiz</NavLink>
                             </div>
                         </div>
 

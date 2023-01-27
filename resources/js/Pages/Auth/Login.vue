@@ -1,4 +1,5 @@
 <script setup>
+import ApplicationLogo from '@/Components/ApplicationLogo.vue';
 import Checkbox from '@/Components/Checkbox.vue';
 import GuestLayout from '@/Layouts/GuestLayout.vue';
 import InputError from '@/Components/InputError.vue';
@@ -10,6 +11,8 @@ import { Head, Link, useForm } from '@inertiajs/vue3';
 defineProps({
     canResetPassword: Boolean,
     status: String,
+    canLogin: Boolean,
+    canRegister: Boolean,
 });
 
 const form = useForm({
@@ -26,8 +29,14 @@ const submit = () => {
 </script>
 
 <template>
-    <GuestLayout>
+    <GuestLayout canRegister="canRegister" canLogin=false>
         <Head title="Log in" />
+
+        <div>
+            <Link href="/">
+                <ApplicationLogo class="w-100 h-100 mb-4 fill-current text-gray-500" />
+            </Link>
+        </div>
 
         <div v-if="status" class="mb-4 font-medium text-sm text-green-600">
             {{ status }}
@@ -86,5 +95,8 @@ const submit = () => {
                 </PrimaryButton>
             </div>
         </form>
+
+
+       
     </GuestLayout>
 </template>

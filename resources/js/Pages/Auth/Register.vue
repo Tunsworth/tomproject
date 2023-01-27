@@ -1,4 +1,5 @@
 <script setup>
+import ApplicationLogo from '@/Components/ApplicationLogo.vue';
 import GuestLayout from '@/Layouts/GuestLayout.vue';
 import InputError from '@/Components/InputError.vue';
 import InputLabel from '@/Components/InputLabel.vue';
@@ -24,7 +25,9 @@ const submit = () => {
 <template>
     <GuestLayout>
         <Head title="Register" />
-
+        <Link href="/">
+                <ApplicationLogo class="w-100 h-100 mb-4 fill-current text-gray-500" />
+        </Link>
         <form @submit.prevent="submit">
             <div>
                 <InputLabel for="name" value="Name" />

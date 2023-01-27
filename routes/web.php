@@ -1,9 +1,13 @@
 <?php
 
+use App\Http\Controllers\AnswerController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\QuizController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -16,14 +20,16 @@ use Inertia\Inertia;
 |
 */
 
+
 Route::get('/', function () {
-    return Inertia::render('Welcome', [
+    return Inertia::render('Auth/Login', [
         'canLogin' => Route::has('login'),
         'canRegister' => Route::has('register'),
         'laravelVersion' => Application::VERSION,
         'phpVersion' => PHP_VERSION,
     ]);
 });
+
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
@@ -36,3 +42,6 @@ Route::middleware('auth')->group(function () {
 });
 
 require __DIR__.'/auth.php';
+
+Route::resource('quizzes', QuizController::class);
+Route::resource('categories', CategoryController::class);

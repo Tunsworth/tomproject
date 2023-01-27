@@ -15,10 +15,14 @@ const props = defineProps({
 
 const proxyChecked = computed({
     get() {
+        if(props.checked == 1){
+            return true
+        }
         return props.checked;
     },
 
     set(val) {
+       
         emit('update:checked', val);
     },
 });
