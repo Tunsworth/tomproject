@@ -22,7 +22,6 @@ class Quiz extends Model
         return $this->hasManyThrough(Answer::class ,Question::class);
     }
 
-
     public function category(){
         return $this->belongsTo(Category::class);
     }
@@ -36,12 +35,7 @@ class Quiz extends Model
             'questions' => $this->questions->map(function ($item){
                  return [ 'id' => $item->id, 'answers' => $item->answers, 'question' => $item->question];
             }),
-            'questionCount' => $this->questions->count()
         ];
-    }
-
-    public function questionCount(){
-        return $this->questions->count();
     }
 
 }

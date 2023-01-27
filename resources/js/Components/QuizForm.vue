@@ -96,7 +96,6 @@
                                                             {{ props.form.errors[`questions.${index}.answers`] }}
                                                         </span>
                                                     </div>
-                                                  
                                                     <div v-for="(answer, number) in question.answers"  :key="number" className="my-4">
                                                     <div class="block mt-4">
                                                         <div class="flex justify-between">
@@ -136,12 +135,10 @@
                                         </div>
                                     </div>
                                 </div>
-                             
-                                <!-- hide button untill a question has been added -->
                                 <div  class="mt-4 flex justify-end">
                                     <button
                                         type="submit"
-                                        className="px-6 py-2 font-bold text-white bg-green-500 rounded"
+                                        class="px-6 py-2 font-bold text-white bg-green-500 rounded"
                                     >Save
                                     </button>
                                 </div>
@@ -166,7 +163,6 @@ import { Head, Link, useForm, router} from '@inertiajs/vue3';
 
 
 const addQuestion = ref(false);
-const questionIndex = ref(0);
 const questions = ref([]);
 const pageTab = ref('information')
 const showCatOptions = ref(false)
@@ -190,13 +186,7 @@ const submit = () => {
     }
 };
 
-
-const createQuiz = () => {
-    props.form.post(route('quizzes.store'));
-    // addQuestion = true
-};
-
-const  startQuestion = () => {
+const startQuestion = () => {
     pageTab.value = 'questions'
     addQuestion.value = true
     if( props.form.questions == false || props.form.questions.value.length  < 1){
@@ -206,8 +196,8 @@ const  startQuestion = () => {
     })
 }
 };
+
 const  newQuestion = (index) => {
-    // page.value = ++questionIndex.value 
     addQuestion.value = true
     props.form.questions.push({
         question:'',
@@ -251,7 +241,7 @@ const  quizQuestions = () => {
 
 router.on('error', (errors) => {
     // route to correct tab if there are errors
-    if(props.form.errors.title || props.form.errors.description || props.form.errors.information){
+    if(props.form.errors.title || props.form.errors.description || props.form.errors.category_id ){
         pageTab.value = 'information' 
     } else {
         pageTab.value = 'questions' 
