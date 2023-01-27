@@ -90,14 +90,13 @@ import Label from '@/Components/InputLabel.vue';
 import Input from '@/Components/TextInput.vue';
 import TextArea from '@/Components/Textarea.vue';
 import { Head, Link, useForm } from '@inertiajs/vue3';
+import { Inertia } from '@inertiajs/inertia';
 
 const props = defineProps({
     quiz: Object,
-    // categories:Array,
 });
 
 const pageTab = ref('information');
-// const revealAnswer = reactive([{question: '', value: ''}])
 const revealAnswer = reactive([])
 
 
@@ -124,6 +123,13 @@ const showAnswer = (index) => {
     }else {
         revealAnswer.push(index)  
     }
+}
+
+const destroy = (id) => {
+    if(confirm('Are you sure?')){
+        Inertia.delete(route('quizzes.destroy', id));
+    }
+    return {destroy}
 }
 
 

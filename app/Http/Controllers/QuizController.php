@@ -26,11 +26,14 @@ class QuizController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
 
-        $quizzes = Quiz::with('Category:id,title')->get();
-        return Inertia::render('Quizzes/Index', ['quizzes' => $quizzes]);
+        $quizzes = Quiz::query()->when($request->input('search'), function ($query, $search) {
+            $query->where('title', 'like', "%{$search}%");
+        })->with('Category:id,title')->paginate(5)->appends($request->all());
+        $filters = $request->only(['search']);
+        return Inertia::render('Quizzes/Index', ['quizzes' => $quizzes, 'filters' => $filters]);
     }
 
     /**
@@ -65,7 +68,7 @@ class QuizController extends Controller
             $question_record->answers()->createMany($question['answers']);
         });   
 
-        return redirect()->route('quizzes.index');
+        return redirect()->route('quizzes.index')->with('message', 'Quiz Created Successfully');
     }
 
     /**
@@ -165,6 +168,9 @@ class QuizController extends Controller
         })->filter()->toArray();
         $quiz->questions()->upsert($questions, ['id'],['question']);
         Answer::upsert($answers, ['id'],['answer', 'correct_answer']);
+
+        return redirect()->route('quizzes.index')->with('message', 'Quiz edited successfully!');
+        
     }
 
     /**
@@ -173,9 +179,13 @@ class QuizController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Quiz $quiz)
     {
-        Quiz::find($id)->delete();
-        return redirect()->route('quizzes.index');
+        
+        $questionsToRemove = Question::where('quiz_id', $quiz->id )->pluck('id');
+        Answer::whereIn('question_id', $questionsToRemove)->delete(); 
+        Question::whereIn('id', $questionsToRemove)->delete(); 
+        $quiz->delete();
+        return redirect()->route('quizzes.index')->with('message', 'Quiz deleted successfully!');
     }
 }

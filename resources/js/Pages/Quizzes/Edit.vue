@@ -2,10 +2,12 @@
     <Head title="Dashboard" />
     <AuthenticatedLayout>
         <template #header>
+            <div class="flex justify-between">
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
                 Edit quiz
             </h2>
-            <Link className="px-6 py-2 text-white bg-blue-500 rounded-md focus:outline-none" :href="route('quizzes.index')">Back</Link>
+            <Link className="px-6 py-2 text-white bg-blue-500 rounded-md focus:outline-none" :href="route('quizzes.index')">Quizzes</Link>
+            </div>
         </template>
         <CategoryModal :show="showCatOptions" @close="showCatOptions = false" ></CategoryModal>
         <QuizForm :form="form" :categories="categories" :edit="true"></QuizForm>
@@ -38,7 +40,6 @@ const form = useForm({
     category_id: props.quiz.category.id,
     questions: props.quiz.questions
 });
-
 
 </script>
 

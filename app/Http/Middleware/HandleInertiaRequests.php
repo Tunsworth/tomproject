@@ -31,6 +31,9 @@ class HandleInertiaRequests extends Middleware
     public function share(Request $request): array
     {
         return array_merge(parent::share($request), [
+            'flash' => [
+                'message' => session('message')
+            ],
             'auth' => [
                 'user' => $request->user(),
                 // Add roles and permission to user prop so that this can be passed to the user pages

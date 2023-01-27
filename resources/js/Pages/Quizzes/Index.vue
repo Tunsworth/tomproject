@@ -2,15 +2,32 @@
 import ApplicationLogo from '@/Components/ApplicationLogo.vue';
 import BreezeAuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import { Head, Link, useForm } from '@inertiajs/vue3';
-defineProps({
+import Input from '@/Components/TextInput.vue';
+import { Inertia } from '@inertiajs/inertia';
+import { ref, watch  } from "vue";
+
+let props = defineProps({
     quizzes: Array,
+    filters: Object
 });
-// const form = useForm();
-function destroy(id) {
-    if (confirm("Are you sure you want to Delete")) {
-        form.delete(route('quizzes.destroy', id));
-    }
+
+const destroy = (id) => {
+        if(confirm('Are you sure?')){
+            Inertia.delete(route('quizzes.destroy', id));
+        }
+        return {destroy}
 }
+let search = ref(props.filters.search);
+watch(search, value => { 
+    Inertia.get('/quizzes', { search: value }, {
+        preserveState: true,
+        replace: true
+    });
+});
+
+
+
+
 </script>
 <template>
     <Head title="Dashboard" />
@@ -25,8 +42,24 @@ function destroy(id) {
                         </div>
                     </div>
                 </div>
-                <div v-if="quizzes && quizzes.length > 0">
-                    <div v-for="quiz in quizzes" class="card bg-white overflow-hidden shadow-sm sm:rounded-lg my-4">
+                <div v-if=" $page.props.flash.message" class="">
+                        <div class="p-2 ">
+                            <div class="flex flex-col items-center">
+                                    <div v-if=" $page.props.flash.message" class="text-blue-600 mb-4">
+                                        {{ $page.props.flash.message }}
+                                    </div>
+                            </div>
+                        </div>
+                    </div>
+
+                <div class="">
+                    <Input v-model="search" type="text" class="mt-1 "  placeholder="Search...."/>
+                </div>
+
+      
+                <div v-if="quizzes && quizzes.data.length > 0">
+                 
+                    <div v-for="quiz in quizzes.data" class="card bg-white overflow-hidden shadow-sm sm:rounded-lg my-4">
                         <Link :href="route('quizzes.show', quiz.id)" >
                         <div class="p-6 bg-white border-b border-gray-200">
                             <div class="flex content-start justify-between">
@@ -36,7 +69,7 @@ function destroy(id) {
                                 </div>
                                 <div class="flexflex-row space-between">
                                     <h2>Category: {{ quiz.category.title}}</h2>
-                                    <div v-if="$page.props.auth.roles.includes('edit')" >
+                                    <div v-if="$page.props.auth.roles.includes('edit')" class="flex justify-end">
                                         <Link
                                             tabIndex="1"
                                             className="px-4 py-2 text-sm text-white bg-blue-500 rounded"
@@ -59,6 +92,35 @@ function destroy(id) {
                         </div>
                     </Link>
 
+                    </div>
+                    <!-- paginator -->
+                    <div>
+                        <template v-for="link in quizzes.links">
+                            <Link
+                     
+                            v-if="link.url"
+                            :href="link.url" 
+                            v-html="link.label"
+                            :class="link.active ? 'text-blue-400' : ''"
+                            class="px-1"
+                            />
+                            <span v-else
+                            v-html="link.label"
+                            :class="link.url ? '' : 'text-gray-400'"
+                            >
+                            </span>
+                        </template>
+                    </div>
+                </div>
+                <div v-else-if="filters.search != null">
+                    <div class="card bg-white overflow-hidden shadow-sm sm:rounded-lg my-4">
+                        <div class="p-6 bg-white border-b border-gray-200">
+                            <div class="flex flex-col items-center">
+                                <div>
+                                   No quizzes matching your search!
+                                </div>    
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div v-else>

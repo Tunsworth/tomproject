@@ -6,11 +6,10 @@
                 <h2 class="font-semibold text-xl text-gray-800 leading-tight">
                    Create Quiz
                 </h2>
-                <Link className="px-6 py-2 text-white bg-blue-500 rounded-md focus:outline-none" :href="route('quizzes.index')">Back</Link>
+                <Link className="px-6 py-2 text-white bg-blue-500 rounded-md focus:outline-none" :href="route('quizzes.index')">All Quizzes</Link>
             </div>
         </template>
         <QuizForm :form="form" :categories="categories"></QuizForm>
-        
     </AuthenticatedLayout>
 </template>
 
